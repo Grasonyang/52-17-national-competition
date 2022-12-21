@@ -10,7 +10,7 @@
     <script src="jquery-3.6.3.min.js"></script>
     <script src="jquery-ui.min.js"></script>
     <link rel="stylesheet" href="jquery-ui.min.css">
-    <link rel="shortcut icon" href="#">
+    <link rel="shortcut icon" href="#"> //fix 404 Error
     <title>Document</title>
 </head>
 <style>
