@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jquery-3.5.1.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <button class="clean">C</button>
+    <input type="text" class="screen">
+    <br>
+    <button class="numbers" value="9">9</button>
+    <button class="numbers" value="8">8</button>
+    <button class="numbers" value="7">7</button>
+    <button class="operation" id="+">+</button><br>
+    <button class="numbers" value="6">6</button>
+    <button class="numbers" value="5">5</button>
+    <button class="numbers" value="4">4</button>
+    <button class="operation" id="-">-</button><br>
+    <button class="numbers" value="3">3</button>
+    <button class="numbers" value="2">2</button>
+    <button class="numbers" value="1">1</button>
+    <button class="operation" id="/">/</button><br>
+    <button class="numbers" value="0">0</button>
+    <button class="dot" id=".">.</button>
+    <button class="eql">=</button>
+    <button class="operation" id="*">*</button><br>
+  </div>
+</body>
+<script>
+  let expression = '';
+  let num1 = null;
+  let num2 = null;
+  let operator = null;
+
+  $(".clean").on('click', function () {
+    expression = '';
+    num1 = null;
+    num2 = null;
+    operator = null;
+    display(expression);
+  });
+
+  $(".numbers").on('click', function () {
+    if (operator == null) {
+      if (num1 == null) {
+        num1 = this.value;
+        num1 = eval(num1);
+        display(num1);
+      } else {
+        num1 += this.value;
+        num1 = eval(num1);
+        display(num1);
+      }
+    } else {
+      if (num2 == null) {
+        num2 = this.value;
+        num2 = eval(num2);
+        display(num1 + operator + num2);
+      } else {
+        num2 += this.value;
+        num2 = eval(num2);
+        display(num1 + operator + num2);
+      }
+    }
+  });
+
+  $(".dot").on('click', function () {
+    if (operator == null) {
+      if (num1 == null) {
+        return;
+      } else {
+        let stringa = num1.toString();
+        if (stringa.includes(".")) {
+          return;
+        } else {
+          num1 = eval(num1);
+          num1 += this.id;
+          display(num1);
+        }
+      }
+    } else {
+      if (num2 == null) {
+        return;
+      } else {
+        let stringa = num2.toString();
+        if (stringa.includes(".")) {
+          return;
+        } else {
+          num2 = eval(num2);
+          num2 += this.id;
+          display(num1 + operator + num2);
+        }
+      }
+    }
+  });
+
+  $(".operation").on('click', function () {
+    if (operator == null) {
+      operator = this.id;
+      display(num1 + operator);
+    } else {
+      if (num2 == null) {
+        operator = this.id;
+        display(num1 + operator);
+      } else {
+        expression = num1 + operator + num2;
+        num1 = eval(expression);
+        num2 = null;
+        operator = this.id;
+        display(num1 + operator);
+      }
+    }
+  });
+
+  $(".eql").on('click', function () {
+    expression = num1 + operator + num2;
+    num1 = eval(expression);
+    num2 = null;
+    operator = null;
+    num1 = Math.round(num1 * 100) / 100;
+    display(num1);
+  });
+
+  function display(text) {
+    $(".screen").val(text);
+  }
+</script>
+
+</html>
