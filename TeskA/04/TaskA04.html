@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jquery-3.5.1.min.js"></script>
+  <script src="cropper.js"></script>
+  <link rel="stylesheet" href="cropper.css">
+  <title>Document</title>
+</head>
+<style>
+  .cropper-view-box {
+    border: 1px dashed red;
+  }
+
+  .cropper-line {
+    height: 0;
+    width: 0;
+  }
+</style>
+
+<body>
+  <div>
+    <input type="file" id="imgfile" accept="image/png,image/jpeg">
+    <button onclick="addimg()">submit</button>
+  </div>
+  <div class="imgcrop">
+
+  </div>
+  <div class="Cropimg">
+
+  </div>
+</body>
+<script>
+  let imagename = "";
+  let cropper1 = null;
+  function addimg() {
+    imagename = $("#imgfile").val();
+    // console.log(imagename)
+    imagename = imagename.replace("C:\\fakepath\\", "");
+    $(".imgcrop").append(`
+      <img src="${imagename}" id="image" alt=""><br>
+      <button onclick="cropper()" id="cropbut">crop</button>
+    `);
+    start();
+  }
+  function start() {
+    let cropper = new Cropper($("#image")[0], {
+      viewMode: 1,
+    });
+    cropper1 = cropper;
+  }
+  function cropper() {
+    cropper1.getCroppedCanvas().toBlob((blob) => {
+      downloadurl = window.URL.createObjectURL(blob);
+      $("#cropbut").remove();
+      // console.log(downloadurl)
+      $(".Cropimg").append(`
+        <img src="${downloadurl}" id="cropimage" alt=""><br>
+        <a href="${downloadurl}" download="crop_${imagename}"><button>download</button></a>
+      `);
+    });
+  }
+</script>
+
+</html>
