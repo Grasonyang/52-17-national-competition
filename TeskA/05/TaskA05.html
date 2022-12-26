@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.3.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="jquery.csv.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="uploadfile" accept=".csv"><br>
+</body>
+<script>
+    let cityarray="";
+    $("#uploadfile").change(function(){
+        let file=this.files[0];
+        let reader=new FileReader();
+        reader.readAsText(file);
+        // console.log(reader);
+        reader.onload=function(e){
+            let alldata=e.target.result;
+            let arr=$.csv.toArrays(alldata);
+            // console.log(arr);
+            let data={};
+            
+            for(var i=1;i<arr.length;i++){
+                let row=arr[i];
+                if(!cityarray.includes(row[0])){
+                    cityarray+=row[0];
+                }
+                let mc=parseInt(row[2]);
+                let fc=parseInt(row[3]);
+                let pc=mc+fc;
+                
+                if(!data[row[0]]){
+                    data[row[0]]={
+                        name:row[0],
+                        pc:pc,
+                    };
+                }else{
+                    data[row[0]].pc+=pc;
+                }
+            }
+            for(var i in data){
+                $("body").append(`
+                    <div style="display:flex">
+                        <span style="width:10px;margin-right:6px;margin-top:5px">${data[i].name}</span>
+                        <div onclick="$('.${data[i].name}').dialog('open')" style="margin-top:5px;width:${data[i].pc}px;background-color:blue">
+                            ${data[i].pc}
+                        </div>    
+                    </div>
+                `);
+            }
+            for(let i=0;i<cityarray.length;i++){
+                $("body").append(`
+                    <div style="border:2px solid black;height:auto;width:auto;" class="${cityarray[i]}"></div>
+                `);
+                $("."+cityarray[i]).dialog({
+                    autoOpen:false,
+                    // width:200,
+                    // height:200,
+                });
+                let county={};
+                for(var j=1;j<arr.length;j++){
+                    let row=arr[j];
+                    let mc=parseInt(row[2]);
+                    let fc=parseInt(row[3]);
+                    
+                    if(!county[row[1]]){
+                        county[row[1]]={
+                            name:row[1],
+                            mc:mc,
+                            fc:fc,
+                        };
+                    }else{
+                        county[row[1]].mc+=mc;
+                        county[row[1]].mc+=mc;
+                    }
+                }
+                for(var k in county){
+                    $("."+cityarray[i]).append(`
+                        <span>${county[k].name}</span>
+                        <span>${county[k].mc}</span>
+                        <span>${county[k].fc}</span><br>
+                    `);
+                }
+            }
+            
+        };
+    });
+</script>
+</html>
