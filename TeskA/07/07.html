@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jquery-3.6.3.min.js"></script>
-    <link rel="stylesheet" href="jquery-ui.css">
-    <script src="jquery-ui.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="jquery-ui.min.css">
+  <script src="jquery-ui.js"></script>
+  <title>Document</title>
 </head>
+<style>
+  img {
+    height: 100px;
+  }
+</style>
+
 <body>
-    <!-- <?php include '07.php'; ?> -->
+
 </body>
 <script>
-    $.post({
-        async:false,
-        url:"07.php",
-        success:function(e){
-            $('body').append(`
-                ${e}
-            `);
-        },
-    });
+  $.get({
+    async: false,
+    url: '07.php',
+    data: {
+      url: window.location.href,
+    },
+    success: function (e) {
+      if ($arr.include)
+        $('body').append(`
+        ${e}
+      `);
+    },
+  });
 </script>
+
 </html>
