@@ -1,127 +1,101 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-section{
+.aa{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #042104;
-    /* animation: animateColor 8s linear infinite; */
+    margin-left: 220px;
+    margin-top: 200px;
 }
-
-section .container{
-    display: flex;
-}
-
-section .container .circle{
-    rotate: 8deg;
+.path {
     position: relative;
-    width: 150px;
-    height: 150px;
-    margin:0 18.5px;
+    width: 300px; 
+    height: 300px;
+    border-radius: 50%;
+    background: rgb(255, 187, 51);
+    margin:-20px;
 }
-
-section .container .circle:nth-child(1) span{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(calc(18deg*var(--i)));
+.path:nth-child(2){
+    width: 400px; 
+    height: 400px;
 }
-
-section .container .circle:nth-child(2) span{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(calc(-18deg*var(--i)));
+.path:nth-child(2){
+    z-index: 1;
 }
-
-
-section .container .circle:nth-child(1) span::before{
-    content: '';
+.car1{ 
     position: absolute;
-    right: 0;
-    top:calc(50%-7.5px);
-    width: 15px;
-    height: 20px;
-    background: #00ff0a;
+    z-index: 3;
+    height: 40px;
+    width: 70px;
     border-radius: 25%;
-    /* 0 0 40px #00ff0a,
-    0 0 60px #00ff0a,
-    0 0 80px #00ff0a,
-    0 0 100px #00ff0a; */
-    transform: scale(0.5    );
-    rotate: -45deg;
-    animation: animate 4s linear infinite;
-    animation-delay: calc(0.1s*var(--i));
+    background-color: aliceblue;
+    top:0px;
+    left: 130px;
+    animation: first 2s linear infinite;
+    transform-origin: 50% 140px;
 }
-@keyframes animate {
-    0%{
-        transform: scale(1);
-    }
-    2%{
-        transform: scale(1);
-    }
-    3%{
-        transform: scale(0.5);
-    }
-    /* 10%{
-        transform: scale(1);
-    } */
-    50%,100%{
-        transform: scale(0.5);
-    }
-}
-
-section .container .circle:nth-child(2) span::before{
-    content: '';
+.car2{
     position: absolute;
-    right: 0;
-    top:calc(50%-7.5px);
-    width: 15px;
-    height: 20px;
-    background: #00ff0a;
+    z-index: 5;
+    height: 40px;
+    width: 70px;
     border-radius: 25%;
-    transform: scale(0.5);
-    rotate: -45deg;
-    animation: animate1 4s linear infinite;
-    animation-delay: calc(0.1s*var(--i));
+    background-color: rgb(240, 248, 255);
+    top:0px;
+    left: 130px;
+    animation: second 2s linear infinite;
+    transform-origin: 50% 150px;
+    
 }
-@keyframes animate1 {
+@keyframes first {
     0%{
-        transform: scale(0.5);
+        transform: rotate(90deg);
+        background-color: rgba(240, 248, 255, 0); 
+    }
+    4%{
+        background-color: rgba(240, 248, 255, 0); 
+    }
+    6%{
+        background-color: rgb(240, 248, 255); 
     }
     49%{
-        transform: scale(0.5);
+        transform: rotate(450deg);
+        background-color: rgb(240, 248, 255); 
     }
     50%{
-        transform: scale(1);
+        transform: rotate(450deg);
+        background-color: rgb(240, 248, 255); 
     }
-    52%{
-        transform: scale(1);
-    }
-    53%{
-        transform: scale(0.5);
+    51%{
+        transform: rotate(450deg);
+        background-color: rgba(240, 248, 255, 0); 
     }
     100%{
-        transform: scale(0.5);
+        transform: rotate(450deg);
+        background-color: rgba(240, 248, 255, 0);
     }
 }
-section .container .circle:nth-child(1){
-    transform: rotate(36deg);
-}
-
-section .container .circle:nth-child(2){
-    transform: rotate(-144deg);
-}
-
-section .container .circle:nth-child(2) span ::before{
-    animation-delay: calc(-0.1s*var(--i));
+@keyframes second {
+    0%{
+        background-color: rgba(240, 248, 255, 0);
+        transform: rotate(270deg);
+    }
+    47%{
+        background-color: rgba(240, 248, 255, 0);
+        transform: rotate(270deg);
+    }
+    48%{
+        background-color: rgba(240, 248, 255, 0.628);
+        transform: rotate(270deg);
+    }
+    50%{
+        background-color: rgb(240, 248, 255);
+        transform: rotate(270deg);
+    }
+    95%{
+        background-color: rgb(240, 248, 255);
+    }
+    97%{
+        background-color: rgba(240, 248, 255, 0);
+    }
+    100%{
+        background-color: rgba(240, 248, 255, 0);
+        transform: rotate(-90deg);
+    }
 }
