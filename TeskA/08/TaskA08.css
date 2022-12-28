@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #042104;
+    /* animation: animateColor 8s linear infinite; */
+}
+
+section .container{
+    display: flex;
+}
+
+section .container .circle{
+    rotate: 8deg;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin:0 18.5px;
+}
+
+section .container .circle:nth-child(1) span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(calc(18deg*var(--i)));
+}
+
+section .container .circle:nth-child(2) span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(calc(-18deg*var(--i)));
+}
+
+
+section .container .circle:nth-child(1) span::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    top:calc(50%-7.5px);
+    width: 15px;
+    height: 20px;
+    background: #00ff0a;
+    border-radius: 25%;
+    /* 0 0 40px #00ff0a,
+    0 0 60px #00ff0a,
+    0 0 80px #00ff0a,
+    0 0 100px #00ff0a; */
+    transform: scale(0.5    );
+    rotate: -45deg;
+    animation: animate 4s linear infinite;
+    animation-delay: calc(0.1s*var(--i));
+}
+@keyframes animate {
+    0%{
+        transform: scale(1);
+    }
+    2%{
+        transform: scale(1);
+    }
+    3%{
+        transform: scale(0.5);
+    }
+    /* 10%{
+        transform: scale(1);
+    } */
+    50%,100%{
+        transform: scale(0.5);
+    }
+}
+
+section .container .circle:nth-child(2) span::before{
+    content: '';
+    position: absolute;
+    right: 0;
+    top:calc(50%-7.5px);
+    width: 15px;
+    height: 20px;
+    background: #00ff0a;
+    border-radius: 25%;
+    transform: scale(0.5);
+    rotate: -45deg;
+    animation: animate1 4s linear infinite;
+    animation-delay: calc(0.1s*var(--i));
+}
+@keyframes animate1 {
+    0%{
+        transform: scale(0.5);
+    }
+    49%{
+        transform: scale(0.5);
+    }
+    50%{
+        transform: scale(1);
+    }
+    52%{
+        transform: scale(1);
+    }
+    53%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(0.5);
+    }
+}
+section .container .circle:nth-child(1){
+    transform: rotate(36deg);
+}
+
+section .container .circle:nth-child(2){
+    transform: rotate(-144deg);
+}
+
+section .container .circle:nth-child(2) span ::before{
+    animation-delay: calc(-0.1s*var(--i));
+}
