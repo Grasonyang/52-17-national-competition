@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.3.min.js"></script>
+    <script src="jquery-ui.js"></script>
+    <link rel="stylesheet" href="jquery-ui.css">
+    <link rel="shortcut icon" href="#">
+    
+    <title>Document</title>
+</head>
+<style>
+    .numbers{
+        display: flex;
+    }
+    .number{
+        display: grid;
+        grid-template-columns: 5px 15px 5px;
+        grid-template-rows: 5px 15px 5px 15px 5px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="numbers">
+            <div class="number">
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+                <div class="part1"></div>
+            </div>
+            <div style="color:rgb(255, 0, 0)">:</div>
+            <div class="number">
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+                <div class="part2"></div>
+            </div>
+            <div class="number">
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+                <div class="part3"></div>
+            </div>
+        </div>
+        <div class="func">
+            <button class="but">Start timer</button>
+            <button class="but" onclick="stop()">Stop timer </button>
+            <button class="but">Reset timer</button>
+        </div>
+    </div>
+</body>
+<script>
+    let numercrt=[
+        "010101000101010",//0
+        "000001000001000",//1
+        "010001010100010",//2
+        "010001010001010",//3
+        "000101010001000",//4
+        "010100010001010",//5
+        "010100010101010",//6
+        "010001000001000",//7
+        "010101010101010",//8
+        "010101010001010",//9
+    ];
+    let n=0;
+    let minute=0;
+    let second=0;
+    let centiseconds=0;
+    let timeid=null;
+    show(0,0,0);
+    $(".but:eq(0)").on('click',function(){
+        if(n==0){
+            n++;
+            if(minute==9 && second==9 && centiseconds==9){
+                show(minute,second,centiseconds);
+                stop();
+            }
+            timeid=setInterval(function(){
+                setTimeout(9999);
+                show(minute,second,centiseconds);
+                centiseconds++;
+                if(minute==9 && second==9 && centiseconds==9){
+                    show(minute,second,centiseconds);
+                    stop();
+                }
+                if(centiseconds>=10){
+                    centiseconds=0;
+                    second++;
+                    if(minute==9 && second==9 && centiseconds==9){
+                        show(minute,second,centiseconds);
+                        stop();
+                    }
+                    if(second>=10){
+                        second=0;
+                        if(minute!=9){
+                            minute++;
+                            if(minute==9 && second==9 && centiseconds==9){
+                                show(minute,second,centiseconds);
+                                stop();
+                            }
+                        }
+                    }
+                }
+            
+            // console.log(minute,second,centiseconds);
+            },10);
+        }
+    });
+    function show(a,b,c){
+        // alert(a,b,c);
+        for(let i=0;i<numercrt[a].length;i++){
+            if(numercrt[a][i]!='0')
+                $(".part1:eq("+i+")").css("background-color","red");
+            else
+                $(".part1:eq("+i+")").css("background-color","white");
+        }
+        for(let i=0;i<numercrt[b].length;i++){
+            if(numercrt[b][i]!='0')
+                $(".part2:eq("+i+")").css("background-color","red");
+            else
+                $(".part2:eq("+i+")").css("background-color","white");
+        }
+        for(let i=0;i<numercrt[c].length;i++){
+            if(numercrt[c][i]!='0')
+                $(".part3:eq("+i+")").css("background-color","red");
+            else
+                $(".part3:eq("+i+")").css("background-color","white");
+        }
+    }
+    function stop(){
+        // alert(1);
+        clearInterval(timeid);
+        n=0;
+    }
+    $(".but:eq(2)").on('click',function(){
+        clearInterval(timeid);
+        minute=0;
+        second=0;
+        centiseconds=0;
+        timeid=null;
+        n=0;
+        show(0,0,0);
+    });
+</script>
+</html>
