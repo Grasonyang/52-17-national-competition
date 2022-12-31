@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="jquery-ui.min.css">
+  <script src="jquery-ui.js"></script>
+  <title>Document</title>
+</head>
+<style>
+  body {
+    margin: 0;
+  }
+
+  .place {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  .placechange {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    color: #ffffff;
+  }
+</style>
+
+<body>
+  <div class="place">
+    <span>Light Mode</span>
+  </div>
+  <!-- <div class="place" style="display: ;">
+    <span>Night Mode</span>
+  </div> -->
+</body>
+<script>
+  $(".place").on('click', function () {
+    $(".place").toggleClass("placechange", function () {
+      $("span").text('Night Mode');
+    });
+  });
+</script>
+
+</html>
