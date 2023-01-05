@@ -1,0 +1,13 @@
+<?php
+    $dst=imagecreatefromjpeg('1.jpg');
+    $dst_info=getimagesize('1.jpg');
+    $dst_x=$dst_info[0]-120;
+    $dst_y=$dst_info[1]-30;
+    $im=imagecreate(110,20);
+    $fontbg=imagecolorallocatealpha($im,0,0,0,127);
+    $fontcolor=imagecolorallocatealpha($im,225,225,225,0);
+    imagestring($im,5,0,0,"WorldSkills",$fontcolor);
+    imagecopymerge($dst,$im,$dst_x,$dst_y,0,0,110,20,100);
+    header('Content-Type:image/jpeg');
+    imagejpeg($dst);
+?>
