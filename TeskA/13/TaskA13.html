@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="jquery-ui.min.css">
+  <script src="jquery-ui.js"></script>
+  <link rel="stylesheet" href="TaskA13.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="but">Button</button>
+  <script>
+    let button = document.getElementById("but");
+    button.addEventListener('click', (event) => {
+      let x = event.clientX - event.target.offsetLeft;
+      let y = event.clientY - event.target.offsetTop;
+      console.log(x, y)
+
+      for (var i = 0; i < 2; i++) {
+        let waves = document.createElement('span');
+        waves.style.left = x + 'px';
+        waves.style.top = y + 'px';
+        button.appendChild(waves);
+        setTimeout((event) => {
+          waves.remove();
+        }, 1500)
+      }
+    })
+  </script>
+</body>
+
+</html>
