@@ -1,0 +1,5 @@
+// save the file with .htaccess
+
+RewriteEngine On
+RewriteRule ^api/user?(.*)$ user.php [NC,L]
+RewriteRule ^api/post?(.*)$ post.php [NC,L]
