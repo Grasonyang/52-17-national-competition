@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="src/jquery-3.6.4.min.js"></script>
+    <script src="src/jquery-ui.js"></script>
+    <link rel="stylesheet" href="src/jquery-ui.css">
+    <title>Document</title>
+</head>
+<style>
+    .ava{
+        height: 100px;
+        width: 100px;
+    }
+</style>
+<body>
+    <header id="header">
+        <h1 id="LOGO">學生資料管理系統</h1>
+        <form id="searchForm">
+            <input type="text" name="search">
+            <button type="button">搜尋</button>
+        </form>
+    </header>
+    <aside id="aside">
+        <button id="addStudent">新增學生</button>
+        <ul id="studentList" class="list">
+            <li class="item">所有學生<span class="num"></span></li>
+        </ul>
+        <ul id="classList" class="list">
+            <li id="addClass" class="item">建立班級</li>
+        </ul>
+        <ul id="trash" class="list">
+            <li class="item">垃圾桶</li>
+        </ul>
+        <button id="export_data">匯出資料</button>
+        <button id="import_data">匯入資料</button>
+    </aside>
+    <main id="main"></main>
+    <div id="dialog"></div>
+    <script src="src/database.js"></script>
+    <script src="src/classs.js"></script>
+    <script src="src/student.js"></script>
+    <script src="src/all.js"></script>
+    
+</body>
+<script>
+    basicdata();
+    function basicdata(){
+        let school=new School;
+        school.allschooldata(function(e){
+            $("#classList .cls").remove();
+            for(let i=0;i<e.length;i++){
+                $("#classList").prepend(`
+                    <li class="item cls">${e[i].class}<span class="num"></span></li>
+                `);
+            }
+
+        });
+    }
+        
+</script>
+</html>
